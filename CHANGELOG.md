@@ -15,3 +15,7 @@
 
 ## 1.0.0
 - Added Audio Player Controller
+
+
+## 1.2.1
+- Just Updated Packages
