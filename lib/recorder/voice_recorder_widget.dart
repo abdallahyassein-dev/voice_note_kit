@@ -7,7 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
 
-import 'package:voice_note_kit/player/utils/format_duration.dart';
+import 'package:voice_note_kit/recorder/styles/voice_classic_style.dart';
+import 'package:voice_note_kit/recorder/styles/voice_compact_style.dart';
 import 'package:voice_note_kit/recorder/utils/utils_for_mobile.dart';
 import 'package:voice_note_kit/recorder/utils/utils_for_web.dart';
 import 'audio_recorder.dart';
@@ -58,6 +59,7 @@ class VoiceRecorderWidget extends StatefulWidget {
   final VoiceUIStyle? style;
   final Color? containerColor;      // New: optional background color
   final Color? borderColor;         // New: optional border color
+  final double? borderRadius;         // New: optional border color
 
   const VoiceRecorderWidget({
     super.key,
@@ -89,7 +91,12 @@ class VoiceRecorderWidget extends StatefulWidget {
     this.style = VoiceUIStyle.classic,
     this.containerColor,
     this.borderColor,
-  });
+    this.borderRadius
+  }): assert(
+        style == VoiceUIStyle.compact ||
+            (containerColor == null && borderColor == null && borderRadius == null),
+        'Container styling (container Color/border Color/border Radius) can only be used with VoiceUIStyle.compact',
+        );
 
   @override
   State<VoiceRecorderWidget> createState() => _VoiceRecorderWidgetState();
@@ -310,158 +317,49 @@ class _VoiceRecorderWidgetState extends State<VoiceRecorderWidget> {
         });
       },
       child : widget.style == VoiceUIStyle.classic
-     ? _buildClassicLayout() :
-      _buildCompactLayout(),
-    );
-  }
-
-  Widget _buildCompactLayout(){
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: 8,
-            horizontal: 8,
-          ),
-          decoration: BoxDecoration(
-            color: widget.containerColor ?? Colors.transparent,
-            border: Border.all(
-              color: widget.borderColor ?? Colors.grey[200]!,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                width: widget.iconSize,
-                height: widget.iconSize,
-                decoration: BoxDecoration(
-                  color: _isRecording
-                      ? _backgroundColor
-                      : widget
-                      .backgroundColor, // Change background color based on recording state
-                  shape: BoxShape.circle, // Make the button circular
-                  boxShadow: _isRecording
-                      ? [
-                    BoxShadow(
-                        color: widget.cancelHintColor
-                            .withAlpha((0.4 * 255).round()),
-                        blurRadius: 8) // Add shadow when recording
-                  ]
-                      : [],
-                ),
-                // Show custom widgets for start/stop recording or default icon
-                child: _isRecording && widget.stopRecordingWidget != null
-                    ? widget.stopRecordingWidget
-                    : !_isRecording && widget.startRecordingWidget != null
-                    ? widget.startRecordingWidget
-                    : Icon(
-                  _isRecording ? Icons.stop : Icons.mic_none,
-                  color: widget.iconColor,
-                  size: widget.iconSize / 2.3,
-                ),
-              ),
-              if ( widget.showTimerText)
-                Text(
-                  _isRecording ?
-                  _isCancelled
-                      ? widget.cancelDoneText
-                      : formatDurationSeconds(
-                      _seconds)  : '0.00', // Format the recording duration
-                  style: widget.timerTextStyle ??
-                      TextStyle(
-                        color: widget.cancelHintColor,
-                        fontSize: widget.timerFontSize,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8,) ,
-        if (_isRecording && _showCancelHint && widget.showSwipeLeftToCancel)
-          Text(
-            widget.dragToLeftText,
-            style: widget.dragToLeftTextStyle ??
-                const TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ),
-          ),
-      ],
-    );
-  }
-
-  Widget _buildClassicLayout(){
-    return  Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // Show cancel hint text when recording and swipe left to cancel
-        if (_isRecording && _showCancelHint && widget.showSwipeLeftToCancel)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
-            child: Text(
-              widget.dragToLeftText,
-              style: widget.dragToLeftTextStyle ??
-                  const TextStyle(
-                    color: Colors.black,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
-          ),
-        // Show timer text when recording
-        if (_isRecording && widget.showTimerText)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Text(
-              _isCancelled
-                  ? widget.cancelDoneText
-                  : formatDurationSeconds(
-                  _seconds), // Format the recording duration
-              style: widget.timerTextStyle ??
-                  TextStyle(
-                    color: widget.cancelHintColor,
-                    fontSize: widget.timerFontSize,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-          ),
-        // Animated container for the recording button
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          width: widget.iconSize,
-          height: widget.iconSize,
-          decoration: BoxDecoration(
-            color: _isRecording
-                ? _backgroundColor
-                : widget
-                .backgroundColor, // Change background color based on recording state
-            shape: BoxShape.circle, // Make the button circular
-            boxShadow: _isRecording
-                ? [
-              BoxShadow(
-                  color: widget.cancelHintColor
-                      .withAlpha((0.4 * 255).round()),
-                  blurRadius: 8) // Add shadow when recording
-            ]
-                : [],
-          ),
-          // Show custom widgets for start/stop recording or default icon
-          child: _isRecording && widget.stopRecordingWidget != null
-              ? widget.stopRecordingWidget
-              : !_isRecording && widget.startRecordingWidget != null
-              ? widget.startRecordingWidget
-              : Icon(
-            _isRecording ? Icons.stop : Icons.mic_none,
-            color: widget.iconColor,
-            size: widget.iconSize / 2.3,
-          ),
-        ),
-      ],
+     ? VoiceClassicStyle(
+          isRecording: _isRecording,
+          showCancelHint: _showCancelHint,
+          showSwipeLeftToCancel: widget.showSwipeLeftToCancel,
+          dragToLeftText: widget.dragToLeftText,
+          dragToLeftTextStyle : widget.dragToLeftTextStyle ,
+          showTimerText: widget.showTimerText,
+          isCancelled: _isCancelled,
+          cancelDoneText: widget.cancelDoneText,
+          timerTextStyle : widget.timerTextStyle ,
+          iconSize: widget.iconSize,
+        seconds: _seconds,
+        cancelHintColor: widget.cancelHintColor,
+        timerFontSize: widget.timerFontSize,
+        backgroundColorSecond: widget.backgroundColor,
+        backgroundColorFirst: _backgroundColor,
+        stopRecordingWidget: widget.stopRecordingWidget,
+        startRecordingWidget: widget.startRecordingWidget,
+        iconColor: widget.iconColor ,
+      ) :
+      VoiceCompactStyle(
+        isRecording: _isRecording,
+        showCancelHint: _showCancelHint,
+        showSwipeLeftToCancel: widget.showSwipeLeftToCancel,
+        dragToLeftText: widget.dragToLeftText,
+        dragToLeftTextStyle : widget.dragToLeftTextStyle ,
+        showTimerText: widget.showTimerText,
+        isCancelled: _isCancelled,
+        cancelDoneText: widget.cancelDoneText,
+        timerTextStyle : widget.timerTextStyle ,
+        iconSize: widget.iconSize,
+        seconds: _seconds,
+        cancelHintColor: widget.cancelHintColor,
+        timerFontSize: widget.timerFontSize,
+        backgroundColorSecond: widget.backgroundColor,
+        backgroundColorFirst: _backgroundColor,
+        stopRecordingWidget: widget.stopRecordingWidget,
+        startRecordingWidget: widget.startRecordingWidget,
+        iconColor: widget.iconColor,
+        containerColor: widget.containerColor,
+        borderColor: widget.borderColor ,
+        borderRadius: widget.borderRadius,
+      ) ,
     );
   }
 }
