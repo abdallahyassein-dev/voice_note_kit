@@ -3,6 +3,7 @@
 import 'dart:io'; // For handling recorded audio files
 import 'package:flutter/material.dart';
 import 'package:voice_note_kit/player/utils/audio_player_controller.dart';
+import 'package:voice_note_kit/recorder/voice_enums/voice_enums.dart';
 import 'package:voice_note_kit/voice_note_kit.dart'; // Importing the custom package for voice recording and playback
 
 void main() {
@@ -62,71 +63,92 @@ class _VoiceRecorderExampleState extends State<VoiceRecorderExample> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // ------------------------ Recorder Section ------------------------
-            VoiceRecorderWidget(
-              iconSize: 100, // Size of the recording icon
-              showTimerText: true, // Show the recording timer
-              showSwipeLeftToCancel:
-                  true, // Allow swipe left to cancel the recording
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: VoiceRecorderWidget(
+                showTimerText: true, // Show the recording timer
+                showSwipeLeftToCancel:
+                    true, // Allow swipe left to cancel the recording
 
-              // Optional: Add custom sounds for recording events
-              // startSoundAsset: "assets/start_warning.mp3",
-              // stopSoundAsset: "assets/start_warning.mp3",
+                // Optional: Add custom sounds for recording events
+                // startSoundAsset: "assets/start_warning.mp3",
+                // stopSoundAsset: "assets/start_warning.mp3",
 
-              /////============================= WEB ONly =================================
-              // When recording is finished
-              onRecordedWeb: (url) {
-                setState(() {
-                  recordedAudioBlobUrl = url;
-                });
-              },
-              /////==============================================================
-              // When recording is finished, save the file and display its path
-              onRecorded: (file) {
-                setState(() {
-                  recordedFile = file; // Store the recorded file
-                });
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                      content: Text(
-                          'Recording saved: ${file.path}')), // Display the recorded file's path
-                );
-              },
+                /////============================= WEB ONly =================================
+                // When recording is finished
+                onRecordedWeb: (url) {
+                  setState(() {
+                    recordedAudioBlobUrl = url;
+                  });
+                },
+                /////==============================================================
+                // When recording is finished, save the file and display its path
+                onRecorded: (file) {
+                  setState(() {
+                    recordedFile = file; // Store the recorded file
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        content: Text(
+                            'Recording saved: ${file.path}')), // Display the recorded file's path
+                  );
+                },
 
-              // When error occurs during recording
-              onError: (error) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                      content: Text(
-                          'Error: $error')), // Display any errors during recording
-                );
-              },
+                // When error occurs during recording
+                onError: (error) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        content: Text(
+                            'Error: $error')), // Display any errors during recording
+                  );
+                },
 
-              // If recording was cancelled
-              actionWhenCancel: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text(
-                          'Recording Cancelled')), // Notify the user that the recording was cancelled
-                );
-              },
+                // If recording was cancelled
+                actionWhenCancel: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text(
+                            'Recording Cancelled')), // Notify the user that the recording was cancelled
+                  );
+                },
 
-              maxRecordDuration: const Duration(
-                  seconds: 60), // Maximum recording duration (60 seconds)
-              permissionNotGrantedMessage:
-                  'Microphone permission required', // Message when permission is not granted
-              dragToLeftText:
-                  'Swipe left to cancel recording', // Text for drag-to-left action
-              dragToLeftTextStyle: const TextStyle(
-                color: Colors.blueAccent,
-                fontSize: 18,
+                maxRecordDuration: const Duration(
+                    seconds: 60), // Maximum recording duration (60 seconds)
+                permissionNotGrantedMessage:
+                    'Microphone permission required', // Message when permission is not granted
+                // now can drag to left or right
+                dragToLeftText:
+                    'Swipe left or right to cancel recording', // Text for drag-to-left action
+                dragToLeftTextStyle: const TextStyle(
+                  color: Colors.blueAccent,
+                  fontSize: 18,
+                ),
+                cancelDoneText:
+                    'Recording cancelled', // Text displayed when recording is cancelled
+                backgroundColor: Colors
+                    .blueAccent, // Background color of the recorder widget
+                cancelHintColor: Colors.red, // Color of the cancel hint
+                iconColor: Colors.white, // Color of the record icon
+                timerFontSize: 16,
+
+                timerTextStyle: const TextStyle(
+                  color: Colors.blueAccent,
+                ), // Font size of the timer
+
+                /////==============================================================
+                // change voice style using VoiceUiStyle "Classic or Compact"
+                style: VoiceUIStyle.compact,
+
+                /////===========================Warning===================================/////
+                // container color   & border color & border radius can change only with voice style compact
+                // containerColor: Colors.grey[100],
+                borderColor: Colors.blue,
+                containerColor: Colors.blue,
+                borderRadius: 16,
+                idleWavesColor: Colors.white,
+                recordingWavesColor: Colors.white,
+                wavesSpeed: const Duration(milliseconds: 500),
               ),
-              cancelDoneText:
-                  'Recording cancelled', // Text displayed when recording is cancelled
-              backgroundColor:
-                  Colors.blueAccent, // Background color of the recorder widget
-              cancelHintColor: Colors.red, // Color of the cancel hint
-              iconColor: Colors.white, // Color of the record icon
-              timerFontSize: 18, // Font size of the timer
             ),
 
             const SizedBox(height: 10),

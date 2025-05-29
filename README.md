@@ -273,6 +273,11 @@ Feel free to explore my YouTube channel and Udemy course for Flutter development
 
 If you like this package, feel free to ⭐️ the repo and share it!
 
+
+## Contributors
+[Esraa Mohamed](https://www.linkedin.com/in/esraa-mohamed-dawood/)
+
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/abdallahyassein-dev/voice_note_kit/blob/main/LICENSE) file for details.
