@@ -59,7 +59,10 @@ class VoiceRecorderWidget extends StatefulWidget {
   final VoiceUIStyle? style;
   final Color? containerColor;      // New: optional background color
   final Color? borderColor;         // New: optional border color
-  final double? borderRadius;         // New: optional border color
+  final Color? idleWavesColor ;
+  final Color? recordingWavesColor ;
+  final double? borderRadius;
+  final Duration? wavesSpeed;        // New: optional border color
 
   const VoiceRecorderWidget({
     super.key,
@@ -91,11 +94,21 @@ class VoiceRecorderWidget extends StatefulWidget {
     this.style = VoiceUIStyle.classic,
     this.containerColor,
     this.borderColor,
-    this.borderRadius
+    this.borderRadius ,
+    this.idleWavesColor = Colors.grey ,
+    this.recordingWavesColor = Colors.blueAccent ,
+    this.wavesSpeed ,
   }): assert(
         style == VoiceUIStyle.compact ||
-            (containerColor == null && borderColor == null && borderRadius == null),
-        'Container styling (container Color/border Color/border Radius) can only be used with VoiceUIStyle.compact',
+            (containerColor == null && borderColor == null && borderRadius == null && idleWavesColor == null && recordingWavesColor == null && wavesSpeed == null),
+        'Container styling ('
+            'container Color / '
+            'border Color / '
+            'border Radius /'
+            'idle waves color /'
+            'recording waves color /'
+            'waves speed /'
+            ') can only be used with VoiceUIStyle.compact',
         );
 
   @override
@@ -359,6 +372,9 @@ class _VoiceRecorderWidgetState extends State<VoiceRecorderWidget> {
         containerColor: widget.containerColor,
         borderColor: widget.borderColor ,
         borderRadius: widget.borderRadius,
+        idleWavesColor: widget.idleWavesColor,
+        recordingWavesColor: widget.recordingWavesColor,
+        speed: widget.wavesSpeed ?? const Duration(milliseconds: 300),
       ) ,
     );
   }

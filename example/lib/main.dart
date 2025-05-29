@@ -141,9 +141,12 @@ class _VoiceRecorderExampleState extends State<VoiceRecorderExample> {
 
                 /////===========================Warning===================================/////
                 // container color   & border color & border radius can change only with voice style compact
-                containerColor: Colors.grey[100],
+                // containerColor: Colors.grey[100],
                 borderColor: Colors.grey,
                 borderRadius: 20,
+                idleWavesColor: Colors.black,
+                recordingWavesColor: Colors.red,
+                wavesSpeed: const Duration(milliseconds: 100),
 
               ),
             ),

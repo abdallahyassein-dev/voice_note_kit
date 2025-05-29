@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../player/utils/format_duration.dart';
+import '../utils/animated_wave_form.dart';
 
 class VoiceCompactStyle extends StatelessWidget {
   const VoiceCompactStyle({super.key,
@@ -24,7 +25,10 @@ class VoiceCompactStyle extends StatelessWidget {
     required this.iconColor,
     required this.containerColor,
     required this.borderColor,
-    required this.borderRadius
+    required this.borderRadius ,
+    required this.idleWavesColor,
+    required this.recordingWavesColor  ,
+    required this.speed
   });
 
   final bool isRecording ;
@@ -47,7 +51,10 @@ class VoiceCompactStyle extends StatelessWidget {
   final Color iconColor ;
   final Color? containerColor;
   final Color? borderColor ;
+  final Color? idleWavesColor ;
+  final Color? recordingWavesColor ;
   final double? borderRadius;
+  final Duration? speed;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -96,6 +103,18 @@ class VoiceCompactStyle extends StatelessWidget {
                   size: iconSize / 2.3,
                 ),
               ),
+              const SizedBox(width: 8,),
+              Expanded(
+                child: AnimatedWaveform(
+                  isRecording: isRecording,
+                  barCount: 30,
+                  maxBarHeight: 40,
+                  idleColor: idleWavesColor,
+                  recordingColor: recordingWavesColor,
+                  speed: speed!,
+                ),
+              ),
+              const SizedBox(width: 8,),
               if ( showTimerText)
                 Text(
                   isRecording ?
