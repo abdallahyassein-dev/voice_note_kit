@@ -5,20 +5,45 @@ import 'package:voice_note_kit/player/utils/format_duration.dart';
 import 'package:voice_note_kit/player/widgets/custom_slider.dart';
 import 'package:voice_note_kit/player/widgets/custom_speed_button.dart';
 
+/// A widget that represents the fourth player style.
 class StyleFourWidget extends StatelessWidget {
+  /// Constructor for the StyleFourWidget.
   final AudioPlayerWidget widget;
+
+  /// The current state of the audio player.
   final bool isPlaying;
+
+  /// The progress of the audio player.
   final double progress;
+
+  /// The current position of the audio player.
   final Duration position;
+
+  /// The duration of the audio player.
   final Duration duration;
+
+  /// The callback function to play the audio.
   final Function playAudio;
+
+  /// The callback function to pause the audio.
   final Function pauseAudio;
+
+  /// The callback function to seek to a specific position in the audio.
   final Function(double) seekTo;
+
+  /// Whether to show the speed control.
   final bool showSpeedControl;
+
+  /// The available playback speeds.
   final List<double> playbackSpeeds;
+
+  /// The current playback speed.
   final double currentSpeed;
+
+  /// The callback function to set the playback speed.
   final Function(double) setSpeed;
 
+  /// Constructor for the [StyleFourWidget].
   const StyleFourWidget({
     super.key,
     required this.widget,

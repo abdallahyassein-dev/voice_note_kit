@@ -14,6 +14,9 @@ import 'package:voice_note_kit/player/utils/generate_waves_from_audio.dart';
 
 import 'utils/blob_configuration/blob_configurations.dart';
 
+/// The main widget for the audio player.
+/// It accepts various parameters to configure the player's appearance and behavior.
+
 class AudioPlayerWidget extends StatefulWidget {
   /// The controller for the audio player.
   final VoiceNotePlayerController? controller;
@@ -89,6 +92,8 @@ class AudioPlayerWidget extends StatefulWidget {
 
   /// Whether to automatically start playing the audio when loaded.
   final bool autoPlay;
+
+  /// Creates a new instance of the [AudioPlayerWidget] widget.
 
   const AudioPlayerWidget({
     super.key,

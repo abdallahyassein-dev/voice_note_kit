@@ -3,14 +3,22 @@ import 'package:flutter/material.dart';
 /// A button that allows the user to adjust the playback speed
 /// by tapping it to cycle through different predefined speeds.
 class SpeedButton extends StatelessWidget {
-  final double currentSpeed; // Current playback speed (e.g., 1.0x, 1.5x, etc.)
-  final List<double>
-      playbackSpeeds; // List of available playback speeds (e.g., [1.0, 1.5, 2.0])
-  final Function(double speed)
-      setSpeed; // Callback function to set the selected speed
-  final Color iconColor; // Color of the text and icon displayed on the button
-  final Color? backgroundColor; // Optional background color for the button
+  /// Current playback speed (e.g., 1.0x, 1.5x, etc.)
+  final double currentSpeed;
 
+  /// List of available playback speeds (e.g., [1.0, 1.5, 2.0])
+  final List<double> playbackSpeeds;
+
+  /// Callback function to set the selected speed
+  final Function(double speed) setSpeed;
+
+  /// Color of the text and icon displayed on the button
+  final Color iconColor;
+
+  /// Optional background color for the button
+  final Color? backgroundColor;
+
+  /// Constructor for the [SpeedButton]
   const SpeedButton({
     super.key,
     required this.currentSpeed,

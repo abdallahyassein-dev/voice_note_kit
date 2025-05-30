@@ -6,16 +6,33 @@ import 'package:voice_note_kit/player/utils/format_duration.dart';
 import 'package:voice_note_kit/player/widgets/player_controller_widget.dart';
 import 'package:voice_note_kit/player/widgets/progress_bar_widget.dart';
 
+/// A widget that represents the third player style.
 class StyleThreeWidget extends StatelessWidget {
+  /// A widget that represents the third player style.
   final AudioPlayerWidget widget;
+
+  /// A flag indicating whether the audio is currently playing.
   final bool isPlaying;
+
+  /// The current progress of the audio playback.
   final double progress;
+
+  /// The current position of the audio playback.
   final Duration position;
+
+  /// The total duration of the audio.
   final Duration duration;
+
+  /// A function to play the audio.
   final Function playAudio;
+
+  /// A function to pause the audio.
   final Function pauseAudio;
+
+  /// A function to seek to a specific position in the audio.
   final Function(double) seekTo;
 
+  /// Creates a new instance of the [StyleThreeWidget] class.
   const StyleThreeWidget({
     super.key,
     required this.widget,

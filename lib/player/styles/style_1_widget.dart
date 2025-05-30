@@ -7,24 +7,50 @@ import 'package:voice_note_kit/player/utils/format_duration.dart';
 import 'package:voice_note_kit/player/widgets/custom_slider.dart';
 import 'package:voice_note_kit/player/widgets/custom_speed_button.dart';
 
+/// A widget that represents the default player style.
 class StyleOneWidget extends StatelessWidget {
+  /// Creates a new instance of the [StyleOneWidget] class.
   final AudioPlayerWidget widget;
+
+  /// The current state of the audio player.
   final bool isPlaying;
+
+  /// The progress of the audio player.
   final double progress;
+
+  /// The current position of the audio player.
   final Duration position;
+
+  /// The duration of the audio player.
   final Duration duration;
+
+  /// Whether to show the progress bar or not.
   final bool showProgressBar;
+
+  /// Whether to show the timer or not.
   final bool showTimer;
+
+  /// The function to play the audio.
   final Function playAudio;
+
+  /// The function to pause the audio.
   final Function pauseAudio;
+
+  /// The function to seek to a specific position in the audio.
   final Function(double) seekTo;
 
+  /// Whether to show the speed control or not
   final bool showSpeedControl; // New property
+  /// The available playback speeds
   final List<double> playbackSpeeds; // New property
+
+  /// The current playback speed
   final double currentSpeed;
 
+  /// The function to set the playback speed
   final Function(double) setSpeed;
 
+  /// Creates a new instance of the [StyleOneWidget] class.
   const StyleOneWidget(
       {super.key,
       required this.widget,

@@ -1,14 +1,36 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+/// A waveform animation widget that visualizes audio input.
+///
+/// This widget displays animated vertical bars that vary in height
+/// to simulate audio recording visualization.
 class AnimatedWaveform extends StatefulWidget {
+  /// Whether the waveform is in recording mode.
   final bool isRecording;
-  final int barCount;
-  final double maxBarHeight;
-  final Duration speed; // <-- new: control animation speed
-  final Color? recordingColor; // <-- new
-  final Color? idleColor; // <-- new
 
+  /// The number of bars displayed in the waveform.
+  final int barCount;
+
+  /// The maximum height of each bar.
+  final double maxBarHeight;
+
+  /// The speed of the bar height animation.
+  final Duration speed;
+
+  /// The color of the bars when recording is active.
+  final Color? recordingColor;
+
+  /// The color of the bars when idle.
+  final Color? idleColor;
+
+  /// Creates an [AnimatedWaveform] widget.
+  ///
+  /// - [isRecording] controls whether animation is active.
+  /// - [barCount] sets how many bars are shown.
+  /// - [maxBarHeight] defines the tallest possible bar.
+  /// - [speed] determines how fast the bars animate.
+  /// - [recordingColor] and [idleColor] control color states.
   const AnimatedWaveform({
     super.key,
     required this.isRecording,
@@ -16,7 +38,7 @@ class AnimatedWaveform extends StatefulWidget {
     this.maxBarHeight = 40,
     this.speed = const Duration(seconds: 2),
     this.recordingColor = Colors.blueAccent,
-   this.idleColor = Colors.grey,
+    this.idleColor = Colors.grey,
   });
 
   @override
@@ -24,7 +46,7 @@ class AnimatedWaveform extends StatefulWidget {
 }
 
 class _AnimatedWaveformState extends State<AnimatedWaveform>
-    with TickerProviderStateMixin  {
+    with TickerProviderStateMixin {
   late List<AnimationController> _controllers;
   late List<Animation<double>> _barAnimations;
   final Random _random = Random();
@@ -42,8 +64,9 @@ class _AnimatedWaveformState extends State<AnimatedWaveform>
     });
 
     _barAnimations = List.generate(widget.barCount, (index) {
-      return Tween<double>(begin: 2.0, end: 2.0)
-          .animate(CurvedAnimation(parent: _controllers[index], curve: Curves.easeInOut));
+      return Tween<double>(begin: 2.0, end: 2.0).animate(
+        CurvedAnimation(parent: _controllers[index], curve: Curves.easeInOut),
+      );
     });
 
     if (widget.isRecording) _startWaveLoop();
@@ -54,7 +77,6 @@ class _AnimatedWaveformState extends State<AnimatedWaveform>
       if (!mounted || !widget.isRecording) return false;
 
       _animateNewHeights();
-
       await Future.delayed(widget.speed);
       return true;
     });
@@ -116,7 +138,8 @@ class _AnimatedWaveformState extends State<AnimatedWaveform>
 
   @override
   Widget build(BuildContext context) {
-    final barColor = widget.isRecording ? widget.recordingColor : widget.idleColor;
+    final barColor =
+        widget.isRecording ? widget.recordingColor : widget.idleColor;
 
     return SizedBox(
       height: widget.maxBarHeight,

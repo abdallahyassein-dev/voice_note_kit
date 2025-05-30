@@ -4,13 +4,19 @@ import 'package:flutter/material.dart';
 /// to adjust progress. It also provides customization for the colors and
 /// behavior of the slider.
 class CustomSlider extends StatelessWidget {
-  final double progress; // Current progress value (range between 0.0 and 1.0)
-  final Color progressBarColor; // The color of the active progress bar
-  final Color
-      progressBarBackgroundColor; // The color of the inactive progress bar
-  final Function(double value)
-      seekTo; // Function to seek to a specific progress value
+  /// Current progress value (range between 0.0 and 1.0)
+  final double progress;
 
+  /// The color of the active progress bar
+  final Color progressBarColor;
+
+  /// The color of the inactive progress bar
+  final Color progressBarBackgroundColor;
+
+  /// Function to seek to a specific progress value
+  final Function(double value) seekTo;
+
+  /// Constructor for the [CustomSlider] widget
   const CustomSlider({
     super.key,
     required this.progress,

@@ -3,15 +3,22 @@ import 'package:flutter/material.dart';
 /// A custom progress bar widget that allows users to seek through content (like audio or video).
 /// It supports dragging to change the progress and smoothly animates the progress bar.
 class ProgressBar extends StatelessWidget {
-  final double progressBarHeight; // Height of the progress bar
-  final Color
-      progressBarBackgroundColor; // Background color of the progress bar
-  final Color
-      progressBarColor; // Color of the progress indicating part of the bar
-  final double progress; // Current progress value (between 0.0 and 1.0)
-  final Function(double)
-      seekTo; // Callback to handle seeking to the new progress position
+  /// Height of the progress bar
+  final double progressBarHeight;
 
+  /// Background color of the progress bar
+  final Color progressBarBackgroundColor;
+
+  /// Color of the progress indicating part of the bar
+  final Color progressBarColor;
+
+  /// Current progress value (between 0.0 and 1.0)
+  final double progress;
+
+  /// Callback to handle seeking to the new progress position
+  final Function(double) seekTo;
+
+  /// Constructor for the [ProgressBar] widget
   const ProgressBar({
     super.key,
     required this.progressBarHeight,

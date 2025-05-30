@@ -1,4 +1,8 @@
+/// Voice UI Style
 enum VoiceUIStyle {
-  classic,  // Text + Timer + Icon (vertical)
-  compact,  // (Icon + Timer) + Text (grouped)
+  /// Text + Timer + Icon (vertical)
+  classic,
+
+  /// (Icon + Timer) + Text (grouped)
+  compact,
 }

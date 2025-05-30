@@ -7,24 +7,54 @@ import 'package:voice_note_kit/player/utils/format_duration.dart';
 import 'package:voice_note_kit/player/widgets/custom_speed_button.dart';
 import 'package:voice_note_kit/player/widgets/wave_slider.dart';
 
+/// A widget that represents the fifth player style.
 class StyleFiveWidget extends StatelessWidget {
+  /// Constructor for the StyleFiveWidget
   final AudioPlayerWidget widget;
+
+  /// is playing or not
   final bool isPlaying;
+
+  /// progress
   final double progress;
+
+  /// position
   final Duration position;
+
+  /// duration
   final Duration duration;
+
+  /// show progress bar
   final bool showProgressBar;
+
+  /// show timer
   final bool showTimer;
+
+  /// play audio
   final Function playAudio;
+
+  /// pause audio
   final Function pauseAudio;
+
+  /// seek to
   final Function(double) seekTo;
+
+  /// waveform
   final List<double> waveformData;
 
+  /// size
+
   final bool showSpeedControl; // New property
+  /// background color
   final List<double> playbackSpeeds; // New property
+  /// current speed
   final double currentSpeed;
 
+  /// size
+
   final Function(double) setSpeed;
+
+  /// Constructor for the [StyleFiveWidget]
 
   const StyleFiveWidget({
     super.key,

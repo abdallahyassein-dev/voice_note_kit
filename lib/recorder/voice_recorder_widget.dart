@@ -57,12 +57,12 @@ class VoiceRecorderWidget extends StatefulWidget {
 
   // optional to style show voice record
   final VoiceUIStyle? style;
-  final Color? containerColor;      // New: optional background color
-  final Color? borderColor;         // New: optional border color
-  final Color? idleWavesColor ;
-  final Color? recordingWavesColor ;
+  final Color? containerColor; // New: optional background color
+  final Color? borderColor; // New: optional border color
+  final Color? idleWavesColor;
+  final Color? recordingWavesColor;
   final double? borderRadius;
-  final Duration? wavesSpeed;        // New: optional border color
+  final Duration? wavesSpeed; // New: optional border color
 
   const VoiceRecorderWidget({
     super.key,
@@ -94,21 +94,26 @@ class VoiceRecorderWidget extends StatefulWidget {
     this.style = VoiceUIStyle.classic,
     this.containerColor,
     this.borderColor,
-    this.borderRadius ,
-    this.idleWavesColor = Colors.grey ,
-    this.recordingWavesColor = Colors.blueAccent ,
-    this.wavesSpeed ,
-  }): assert(
-        style == VoiceUIStyle.compact ||
-            (containerColor == null && borderColor == null && borderRadius == null && idleWavesColor == null && recordingWavesColor == null && wavesSpeed == null),
-        'Container styling ('
-            'container Color / '
-            'border Color / '
-            'border Radius /'
-            'idle waves color /'
-            'recording waves color /'
-            'waves speed /'
-            ') can only be used with VoiceUIStyle.compact',
+    this.borderRadius,
+    this.idleWavesColor = Colors.grey,
+    this.recordingWavesColor = Colors.blueAccent,
+    this.wavesSpeed,
+  }) : assert(
+          style == VoiceUIStyle.compact ||
+              (containerColor == null &&
+                  borderColor == null &&
+                  borderRadius == null &&
+                  idleWavesColor == null &&
+                  recordingWavesColor == null &&
+                  wavesSpeed == null),
+          'Container styling ('
+          'container Color / '
+          'border Color / '
+          'border Radius /'
+          'idle waves color /'
+          'recording waves color /'
+          'waves speed /'
+          ') can only be used with VoiceUIStyle.compact',
         );
 
   @override
@@ -314,7 +319,7 @@ class _VoiceRecorderWidgetState extends State<VoiceRecorderWidget> {
 
           // Cancel recording if dragged far enough
           // make cancel by remove right (>100) or left (< -70)
-          if ((distance < -70 ||distance > 100 ) && !_isCancelled) {
+          if ((distance < -70 || distance > 100) && !_isCancelled) {
             _cancelRecording();
           }
         }
@@ -329,53 +334,53 @@ class _VoiceRecorderWidgetState extends State<VoiceRecorderWidget> {
           _backgroundColor = widget.backgroundColor; // Reset background color
         });
       },
-      child : widget.style == VoiceUIStyle.classic
-     ? VoiceClassicStyle(
-          isRecording: _isRecording,
-          showCancelHint: _showCancelHint,
-          showSwipeLeftToCancel: widget.showSwipeLeftToCancel,
-          dragToLeftText: widget.dragToLeftText,
-          dragToLeftTextStyle : widget.dragToLeftTextStyle ,
-          showTimerText: widget.showTimerText,
-          isCancelled: _isCancelled,
-          cancelDoneText: widget.cancelDoneText,
-          timerTextStyle : widget.timerTextStyle ,
-          iconSize: widget.iconSize,
-        seconds: _seconds,
-        cancelHintColor: widget.cancelHintColor,
-        timerFontSize: widget.timerFontSize,
-        backgroundColorSecond: widget.backgroundColor,
-        backgroundColorFirst: _backgroundColor,
-        stopRecordingWidget: widget.stopRecordingWidget,
-        startRecordingWidget: widget.startRecordingWidget,
-        iconColor: widget.iconColor ,
-      ) :
-      VoiceCompactStyle(
-        isRecording: _isRecording,
-        showCancelHint: _showCancelHint,
-        showSwipeLeftToCancel: widget.showSwipeLeftToCancel,
-        dragToLeftText: widget.dragToLeftText,
-        dragToLeftTextStyle : widget.dragToLeftTextStyle ,
-        showTimerText: widget.showTimerText,
-        isCancelled: _isCancelled,
-        cancelDoneText: widget.cancelDoneText,
-        timerTextStyle : widget.timerTextStyle ,
-        iconSize: widget.iconSize,
-        seconds: _seconds,
-        cancelHintColor: widget.cancelHintColor,
-        timerFontSize: widget.timerFontSize,
-        backgroundColorSecond: widget.backgroundColor,
-        backgroundColorFirst: _backgroundColor,
-        stopRecordingWidget: widget.stopRecordingWidget,
-        startRecordingWidget: widget.startRecordingWidget,
-        iconColor: widget.iconColor,
-        containerColor: widget.containerColor,
-        borderColor: widget.borderColor ,
-        borderRadius: widget.borderRadius,
-        idleWavesColor: widget.idleWavesColor,
-        recordingWavesColor: widget.recordingWavesColor,
-        speed: widget.wavesSpeed ?? const Duration(milliseconds: 300),
-      ) ,
+      child: widget.style == VoiceUIStyle.classic
+          ? VoiceClassicStyle(
+              isRecording: _isRecording,
+              showCancelHint: _showCancelHint,
+              showSwipeLeftToCancel: widget.showSwipeLeftToCancel,
+              dragToLeftText: widget.dragToLeftText,
+              dragToLeftTextStyle: widget.dragToLeftTextStyle,
+              showTimerText: widget.showTimerText,
+              isCancelled: _isCancelled,
+              cancelDoneText: widget.cancelDoneText,
+              timerTextStyle: widget.timerTextStyle,
+              iconSize: widget.iconSize,
+              seconds: _seconds,
+              cancelHintColor: widget.cancelHintColor,
+              timerFontSize: widget.timerFontSize,
+              backgroundColorSecond: widget.backgroundColor,
+              backgroundColorFirst: _backgroundColor,
+              stopRecordingWidget: widget.stopRecordingWidget,
+              startRecordingWidget: widget.startRecordingWidget,
+              iconColor: widget.iconColor,
+            )
+          : VoiceCompactStyle(
+              isRecording: _isRecording,
+              showCancelHint: _showCancelHint,
+              showSwipeLeftToCancel: widget.showSwipeLeftToCancel,
+              dragToLeftText: widget.dragToLeftText,
+              dragToLeftTextStyle: widget.dragToLeftTextStyle,
+              showTimerText: widget.showTimerText,
+              isCancelled: _isCancelled,
+              cancelDoneText: widget.cancelDoneText,
+              timerTextStyle: widget.timerTextStyle,
+              iconSize: widget.iconSize,
+              seconds: _seconds,
+              cancelHintColor: widget.cancelHintColor,
+              timerFontSize: widget.timerFontSize,
+              backgroundColorSecond: widget.backgroundColor,
+              backgroundColorFirst: _backgroundColor,
+              stopRecordingWidget: widget.stopRecordingWidget,
+              startRecordingWidget: widget.startRecordingWidget,
+              iconColor: widget.iconColor,
+              containerColor: widget.containerColor,
+              borderColor: widget.borderColor,
+              borderRadius: widget.borderRadius,
+              idleWavesColor: widget.idleWavesColor,
+              recordingWavesColor: widget.recordingWavesColor,
+              speed: widget.wavesSpeed ?? const Duration(milliseconds: 300),
+            ),
     );
   }
 }

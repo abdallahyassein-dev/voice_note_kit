@@ -4,18 +4,28 @@ import 'package:voice_note_kit/player/utils/get_shape.dart'; // Import for the u
 
 /// A custom player control button that toggles between play and pause states.
 class PlayerControls extends StatelessWidget {
-  final double size; // Size of the player control button
-  final Color iconColor; // Color of the icon (play/pause)
-  final Color backgroundColor; // Background color of the control button
-  final PlayIconShapeType
-      shapeType; // The shape type for the control button (determines its shape)
-  final bool
-      isPlaying; // Boolean flag to indicate whether the audio is currently playing
-  final VoidCallback
-      onPlayPause; // Callback function that toggles between play and pause
-  final TextDirection
-      textDirection; // Text direction to handle different languages (LTR or RTL)
+  /// Size of the player control button
+  final double size;
 
+  /// Color of the icon (play/pause)
+  final Color iconColor;
+
+  /// Background color of the control button
+  final Color backgroundColor;
+
+  /// The shape type for the control button (determines its shape)
+  final PlayIconShapeType shapeType;
+
+  /// Boolean flag to indicate whether the audio is currently playing
+  final bool isPlaying;
+
+  /// Callback function that toggles between play and pause
+  final VoidCallback onPlayPause;
+
+  /// Text direction to handle different languages (LTR or RTL)
+  final TextDirection textDirection;
+
+  /// Constructor for the [PlayerControls] widget
   const PlayerControls({
     super.key,
     required this.size,
