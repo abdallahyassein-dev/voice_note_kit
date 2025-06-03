@@ -1,5 +1,5 @@
-// file_utils_stub.dart
+/// file_utils_stub.dart
 String getTempFileForWeb() {
-  // Web: Just return a dummy file name
+  /// Web: Just return a dummy file name
   return '${DateTime.now().millisecondsSinceEpoch}.m4a';
 }

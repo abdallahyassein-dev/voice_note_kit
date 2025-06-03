@@ -22,3 +22,6 @@
 
 ## 1.3.0
 - Updated Voice Recorder Styles
+
+## 1.3.2
+- Just Upgraded The Packages

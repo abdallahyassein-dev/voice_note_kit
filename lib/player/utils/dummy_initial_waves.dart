@@ -1,6 +1,6 @@
 // ignore: file_names
 
-// Just Dummy Data for dummy waves until it loads the real data
+/// Just Dummy Data for dummy waves until it loads the real data
 List<double> dummyWaves = [
   0.19549560546875,
   -0.243194580078125,
