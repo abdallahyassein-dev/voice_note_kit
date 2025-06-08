@@ -98,23 +98,7 @@ class VoiceRecorderWidget extends StatefulWidget {
     this.idleWavesColor = Colors.grey,
     this.recordingWavesColor = Colors.blueAccent,
     this.wavesSpeed,
-  }) : assert(
-          style == VoiceUIStyle.compact ||
-              (containerColor == null &&
-                  borderColor == null &&
-                  borderRadius == null &&
-                  idleWavesColor == null &&
-                  recordingWavesColor == null &&
-                  wavesSpeed == null),
-          'Container styling ('
-          'container Color / '
-          'border Color / '
-          'border Radius /'
-          'idle waves color /'
-          'recording waves color /'
-          'waves speed /'
-          ') can only be used with VoiceUIStyle.compact',
-        );
+  });
 
   @override
   State<VoiceRecorderWidget> createState() => _VoiceRecorderWidgetState();
