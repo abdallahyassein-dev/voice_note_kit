@@ -25,3 +25,6 @@
 
 ## 1.3.2
 - Just Upgraded The Packages
+
+## 1.3.3
+- Fixed Assertion Bug
